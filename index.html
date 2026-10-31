@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Activité 1 – Passé composé</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6f6f6;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.page {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 14px 40px;
+}
+
+.titre-activite {
+    background: linear-gradient(135deg,#ff5b63 0%,#ff4a55 100%);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 18px;
+    margin-bottom: 18px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.carte {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    margin-bottom: 18px;
+}
+
+.sous-titre {
+    color: #d84049;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+
+/* IMAGE */
+
+.image-reference {
+    width: 100%;
+    max-width: 760px;
+    display: block;
+    margin: 18px auto 0;
+    border-radius: 12px;
+    border: 1px solid #dddddd;
+}
+
+
+/* ROUE */
+
+.roue-zone {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.roue-wrapper {
+    position: relative;
+    width: 320px;
+    height: 320px;
+}
+
+.roue {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 8px solid white;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+
+    background:
+        conic-gradient(
+            #ff6b70 0deg 60deg,
+            #ff9b73 60deg 120deg,
+            #ffd36f 120deg 180deg,
+            #8fd3b5 180deg 240deg,
+            #7fb7e8 240deg 300deg,
+            #b49be8 300deg 360deg
+        );
+
+    transition: transform 3s cubic-bezier(.17,.67,.24,1);
+    position: relative;
+}
+
+.numero {
+    position: absolute;
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.n1 { top: 38px; right: 80px; }
+.n2 { top: 132px; right: 35px; }
+.n3 { bottom: 45px; right: 85px; }
+.n4 { bottom: 45px; left: 85px; }
+.n5 { top: 132px; left: 35px; }
+.n6 { top: 38px; left: 80px; }
+
+.pointeur {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 32px solid #333333;
+    z-index: 10;
+}
+
+
+/* BOUTON */
+
+.actions {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn-principal {
+    background: #ff5257;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 28px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(255,82,87,0.30);
+}
+
+.btn-principal:hover {
+    background: #ef454c;
+}
+
+
+/* QUESTION */
+
+.question-box {
+    display: none;
+    background: #fff2f3;
+    border-left: 5px solid #ff5257;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 24px;
+}
+
+.question-titre {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.reponse {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 9px 0;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.reponse:hover {
+    background: #fff7f7;
+    border-color: #ff8a80;
+}
+
+.reponse input {
+    margin-right: 8px;
+}
+
+
+/* FEEDBACK */
+
+.feedback {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.feedback.correct {
+    background: #eef9f0;
+    border-left: 5px solid #58a868;
+}
+
+.feedback.incorrect {
+    background: #fff0f0;
+    border-left: 5px solid #df5b62;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .roue-wrapper,
+    .roue {
+        width: 260px;
+        height: 260px;
+    }
+
+    .numero {
+        font-size: 20px;
+    }
+
+    .n1 { top: 28px; right: 63px; }
+    .n2 { top: 105px; right: 26px; }
+    .n3 { bottom: 35px; right: 67px; }
+    .n4 { bottom: 35px; left: 67px; }
+    .n5 { top: 105px; left: 26px; }
+    .n6 { top: 28px; left: 63px; }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TITRE -->
+
+    <div class="titre-activite">
+        Activité 1. Passé composé
+    </div>
+
+
+    <!-- IMAGE ET CONSIGNE -->
+
+    <div class="carte">
+
+        <p style="margin:0;">
+            À partir de l’image ci-dessous, révisez les points qui vous posent encore difficulté.
+            Puis, faites tourner la roue et choisissez la bonne réponse à la question tirée.
+        </p>
+
+        <img
+            class="image-reference"
+            src="https://i.postimg.cc/nhKGQngV/French-Passe-Compose-Grammar-Reference-Sheet.png"
+            alt="Révision du passé composé"
+        >
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="carte">
+
+        <div class="sous-titre">
+            Quiz roue — Le passé composé
+        </div>
+
+        <p>
+            Faites tourner la roue pour obtenir une question.
+        </p>
+
+
+        <!-- ROUE -->
+
+        <div class="roue-zone">
+
+            <div class="roue-wrapper">
+
+                <div class="pointeur"></div>
+
+                <div id="roue" class="roue">
+
+                    <span class="numero n1">1</span>
+                    <span class="numero n2">2</span>
+                    <span class="numero n3">3</span>
+                    <span class="numero n4">4</span>
+                    <span class="numero n5">5</span>
+                    <span class="numero n6">6</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="btn-principal"
+                onclick="tournerRoue()">
+                Faire tourner la roue
+            </button>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div id="question-box" class="question-box">
+
+            <div
+                id="question-titre"
+                class="question-titre">
+            </div>
+
+            <div id="reponses"></div>
+
+            <div
+                id="feedback"
+                class="feedback">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+    {
+        question:
+            "L’été dernier, elles ___ en Gaspésie. (aller)",
+
+        choix: [
+            "sont allées",
+            "ont allé",
+            "sont allé",
+            "est allée"
+        ],
+
+        bonne: 0
+    },
+
+    {
+        question:
+            "J’___ une visite guidée. (faire)",
+
+        choix: [
+            "suis fait",
+            "as fait",
+            "a fait",
+            "ai fait"
+        ],
+
+        bonne: 3
+    },
+
+    {
+        question:
+            "Mes amis ___ tôt à l’aéroport. (partir)",
+
+        choix: [
+            "ont partis",
+            "sont partis",
+            "sont parties",
+            "a partis"
+        ],
+
+        bonne: 1
+    },
+
+    {
+        question:
+            "Nous ___ plusieurs photos. (prendre)",
+
+        choix: [
+            "sommes pris",
+            "avons prendu",
+            "avons pris",
+            "avons prendre"
+        ],
+
+        bonne: 2
+    },
+
+    {
+        question:
+            "Sophie et Léa ___ au bord du lac. (se baigner)",
+
+        choix: [
+            "se sont baignées",
+            "ont se baignées",
+            "sont baigné",
+            "se sont baigné"
+        ],
+
+        bonne: 0
+    },
+
+    {
+        question:
+            "Tu ___ un musée. (visiter)",
+
+        choix: [
+            "es visité",
+            "as visite",
+            "as visiter",
+            "as visité"
+        ],
+
+        bonne: 3
+    }
+
+];
+
+
+let rotationActuelle = 0;
+let questionCourante = 0;
+let roueEnCours = false;
+
+
+/* ==================================================
+   TOURNER LA ROUE
+================================================== */
+
+function tournerRoue() {
+
+    if (roueEnCours) return;
+
+    roueEnCours = true;
+
+    const roue =
+        document.getElementById("roue");
+
+    const questionBox =
+        document.getElementById("question-box");
+
+    const feedback =
+        document.getElementById("feedback");
+
+
+    questionBox.style.display = "none";
+    feedback.style.display = "none";
+
+
+    /* Choix aléatoire de 0 à 5 */
+
+    questionCourante =
+        Math.floor(
+            Math.random() * questions.length
+        );
+
+
+    /*
+       Chaque secteur = 60°.
+       On ajoute plusieurs tours complets.
+    */
+
+    const tours =
+        5 * 360;
+
+    const angleQuestion =
+        questionCourante * 60 + 30;
+
+    const angleFinal =
+        360 - angleQuestion;
+
+
+    rotationActuelle +=
+        tours + angleFinal;
+
+
+    roue.style.transform =
+        "rotate(" +
+        rotationActuelle +
+        "deg)";
+
+
+    setTimeout(function() {
+
+        afficherQuestion(
+            questionCourante
+        );
+
+        roueEnCours =
+            false;
+
+    }, 3000);
+
+}
+
+
+/* ==================================================
+   AFFICHER LA QUESTION
+================================================== */
+
+function afficherQuestion(index) {
+
+    const question =
+        questions[index];
+
+    const questionBox =
+        document.getElementById(
+            "question-box"
+        );
+
+    const titre =
+        document.getElementById(
+            "question-titre"
+        );
+
+    const reponses =
+        document.getElementById(
+            "reponses"
+        );
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    titre.textContent =
+        (index + 1) +
+        ". " +
+        question.question;
+
+
+    reponses.innerHTML =
+        "";
+
+    feedback.style.display =
+        "none";
+
+
+    question.choix.forEach(
+        function(choix, i) {
+
+            const label =
+                document.createElement(
+                    "label"
+                );
+
+            label.className =
+                "reponse";
+
+
+            const lettre =
+                String.fromCharCode(
+                    65 + i
+                );
+
+
+            label.innerHTML =
+                '<input type="radio" ' +
+                'name="reponse-question" ' +
+                'value="' + i + '">' +
+                '<strong>' +
+                lettre +
+                ')</strong> ' +
+                choix;
+
+
+            label.addEventListener(
+                "click",
+                function() {
+
+                    verifierReponse(i);
+
+                }
+            );
+
+
+            reponses.appendChild(
+                label
+            );
+
+        }
+    );
+
+
+    questionBox.style.display =
+        "block";
+
+}
+
+
+/* ==================================================
+   VÉRIFIER LA RÉPONSE
+================================================== */
+
+function verifierReponse(indexChoisi) {
+
+    const question =
+        questions[
+            questionCourante
+        ];
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.className =
+        "feedback";
+
+
+    if (
+        indexChoisi ===
+        question.bonne
+    ) {
+
+        feedback.classList.add(
+            "correct"
+        );
+
+        feedback.innerHTML =
+            "Bonne réponse ! <strong>" +
+            question.choix[
+                question.bonne
+            ] +
+            "</strong>";
+
+    }
+
+    else {
+
+        feedback.classList.add(
+            "incorrect"
+        );
+
+        feedback.innerHTML =
+            "Ce n’est pas la bonne réponse. Essayez encore.";
+
+    }
+
+
+    feedback.style.display =
+        "block";
+
+}
+
+</script>
+
+</body>
+</html>
